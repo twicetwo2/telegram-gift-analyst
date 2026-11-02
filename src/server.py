@@ -16,10 +16,7 @@ logger = logging.getLogger("giftasset-mcp")
 mcp = FastMCP(
     "giftasset-analyst",
     transport_security=TransportSecuritySettings(
-        allowed_hosts=[
-            "telegram-gift-analyst.onrender.com",
-            "telegram-gift-analyst.onrender.com:*",
-        ],
+        enable_dns_rebinding_protection=False,
     ),
 )
 tg_client = GiftAssetClient()
