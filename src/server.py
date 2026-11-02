@@ -5,6 +5,7 @@ import logging
 import os
 from typing import Optional, Literal, List
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 from .client import GiftAssetClient
 
 # Configure basic logging
@@ -12,7 +13,15 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(level
 logger = logging.getLogger("giftasset-mcp")
 
 # Initialize FastMCP Server
-mcp = FastMCP("giftasset-analyst")
+mcp = FastMCP(
+    "giftasset-analyst",
+    transport_security=TransportSecuritySettings(
+        allowed_hosts=[
+            "telegram-gift-analyst.onrender.com",
+            "telegram-gift-analyst.onrender.com:*",
+        ],
+    ),
+)
 tg_client = GiftAssetClient()
 
 
