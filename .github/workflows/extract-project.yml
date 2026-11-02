@@ -1,0 +1,19 @@
+name: Extract project ZIP
+on: push: paths: - '.github/workflows/extract-project.yml' workflow_dispatch:
+permissions: contents: write
+jobs: extract: runs-on: ubuntu-latest steps: - name: Checkout repository uses: actions/checkout@v4
+  - name: Extract project
+    run: |
+      unzip -q telegram_gifts_analyst_cloud_fixed.zip -d /tmp/project
+      cp -a /tmp/project/giftasset_mcp-main/. .
+      rm telegram_gifts_analyst_cloud_fixed.zip
+
+  - name: Commit project files
+    run: |
+      git config user.name "github-actions[bot]"
+      git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      git add -A
+      if ! git diff --cached --quiet; then
+        git commit -m "Extract Telegram Gifts Analyst project"
+        git push
+      fi
