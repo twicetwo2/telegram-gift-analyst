@@ -392,8 +392,8 @@ if __name__ == "__main__":
     import os
     transport = os.getenv('MCP_TRANSPORT', 'stdio')
     if transport == 'streamable-http':
-    mcp.settings.host = "0.0.0.0"
-    mcp.settings.port = int(os.getenv("PORT", "8000"))
-    mcp.run(transport="streamable-http")
-else:
-    mcp.run(transport='stdio')
+        mcp.settings.host = "0.0.0.0"
+        mcp.settings.port = int(os.getenv("PORT", "8000"))
+        mcp.run(transport="streamable-http")
+    else:
+        mcp.run(transport='stdio')
